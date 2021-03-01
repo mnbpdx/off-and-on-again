@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "off-and-on-again-android"
+rootProject.name = "android-client"
