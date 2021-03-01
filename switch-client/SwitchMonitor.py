@@ -1,5 +1,6 @@
 import requests
 from gpiozero import Button
+from os import system, name
 
 def main():
     url = 'http://localhost:5000/switches' 
@@ -9,35 +10,41 @@ def main():
     beaverTail = Button(2)
 
     while True:
-        printValues()
-        waitForSwitchOn(url)
-        printValues()
-        waitForSwitchOff(url)
+        printValues(beaverTail)
+        waitForSwitchOn(beaverTail, url)
+        printValues(beaverTail)
+        waitForSwitchOff(beaverTail, url)
 
-def printValues():
+def printValues(switch):
     print("Current Values of beaverTail object:")
     print("------------------------------------")
-    print("held_time: " + str(beaverTail.held_time))
-    print("hold_repeat: " + str(beaverTail.hold_repeat))
-    print("hold_time: " + str(beaverTail.hold_time))
-    print("is_held: " + str(beaverTail.is_held))
-    print("is_pressed: " + str(beaverTail.is_pressed))
-    print("pin: " + str(beaverTail.pin))
-    print("pull_up: " + str(beaverTail.pull_up))
-    print("value: " + str(beaverTail.value))
+    print("held_time: " + str(switch.held_time))
+    print("hold_repeat: " + str(switch.hold_repeat))
+    print("hold_time: " + str(switch.hold_time))
+    print("is_held: " + str(switch.is_held))
+    print("is_pressed: " + str(switch.is_pressed))
+    print("pin: " + str(switch.pin))
+    print("pull_up: " + str(switch.pull_up))
+    print("value: " + str(switch.value))
 
-def waitForSwitchOn(url):
-    beaverTail.wait_for_press()
+def waitForSwitchOn(switch, url):
+    switch.wait_for_press()
     r = requests.patch(url, json=payload)
     print("Beaver Tail switched on!")
     
-def waitForSwitchOff(url):
-    beaverTail.wait_for_release()
+def waitForSwitchOff(switch, url):
+    switch.wait_for_release()
     r = requests.patch(url, json=payload)
     print("Beaver Tail switched off!")
 
-main()
+def objectTest():
+    beaverTail = Button(2)
 
+    while True:
+        system('clear')
+        printValues(beaverTail)
+main()
+#objectTest()
 
 #def htmlTest():
 #    payload = {'name': 'A New Switch', 'status': '1', 'countFlips': '9001'}
