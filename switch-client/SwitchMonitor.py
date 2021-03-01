@@ -16,16 +16,15 @@ def main():
 
 def printValues():
     print("Current Values of beaverTail object:")
-    print("is_held: " + str(beaverTail.is_held))
-    print("is_pressed: " + str(beaverTail.is_pressed))
+    print("------------------------------------")
     print("held_time: " + str(beaverTail.held_time))
     print("hold_repeat: " + str(beaverTail.hold_repeat))
     print("hold_time: " + str(beaverTail.hold_time))
-    print("is_pressed: " + str(beaverTail.is_held))
-    print("is_pressed: " + str(beaverTail.is_held))
-    print("is_pressed: " + str(beaverTail.is_held))
-    print("is_pressed: " + str(beaverTail.is_held))
-
+    print("is_held: " + str(beaverTail.is_held))
+    print("is_pressed: " + str(beaverTail.is_pressed))
+    print("pin: " + str(beaverTail.pin))
+    print("pull_up: " + str(beaverTail.pull_up))
+    print("value: " + str(beaverTail.value))
 
 def waitForSwitchOn(url):
     beaverTail.wait_for_press()
