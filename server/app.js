@@ -5,7 +5,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 // Import Routes Here
-// import roomRoutes from "./api/routes/rooms.js";
+import switchRoutes from "./api/routes/switches.js";
 
 mongoose.connect(
   "mongodb+srv://mbeebepdx:" +
@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 // // Routes to handle requests
-// app.use("/rooms", roomRoutes);
+app.use("/switches", switchRoutes);
 
 // Handles requests that don't correspond to routes
 app.use((req, res, next) => {
