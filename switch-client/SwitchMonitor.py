@@ -1,3 +1,4 @@
+import requests
 from gpiozero import Button
 
 def main():
@@ -13,7 +14,10 @@ def main():
         beaverTail.wait_for_release()
         print("Beaver tail switched off!")
 
-
+def htmlTest():
+    payload = {'name': 'ACoolSwitch', 'status': '1', 'countFlips': '8'}
+    r = requests.post('http://localhost:5000/switches', json=payload)
+    print(r.text)
 
 def printValues():
     print("Current Values of beaverTail object:")
@@ -21,4 +25,5 @@ def printValues():
     print("is_pressed: " + str(beaverTail.is_held))
 
 
-main()
+htmlTest()
+#main()
