@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.example.off_and_on_again_android.databinding.FragmentSwitchCountBinding
 
 /**
@@ -29,6 +28,7 @@ class SwitchCountFragment : Fragment() {
     ): View? {
         _binding = FragmentSwitchCountBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(SwitchCountViewModel::class.java)
+        activity?.let { viewModel.getSwitchCountRealTime(it) }
         return binding.root
     }
 
@@ -39,9 +39,9 @@ class SwitchCountFragment : Fragment() {
             binding.flipCountValue.text = viewModel.flipCount.value.toString()
         }
 
-        binding.buttonFirst.setOnClickListener {
-            viewModel.getSwitchCount()
-        }
+//        binding.buttonFirst.setOnClickListener {
+//            viewModel.getSwitchCount()
+//        }
     }
 
     override fun onDestroyView() {
