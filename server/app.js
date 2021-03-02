@@ -8,9 +8,9 @@ import mongoose from "mongoose";
 import switchRoutes from "./api/routes/switches.js";
 
 mongoose.connect(
-  "mongodb+srv://mbeebepdx:" +
+  process.env.MONGO_ATLAS_URL_1ST_HALF +
     process.env.MONGO_ATLAS_PW +
-    "@cluster0.nvoye.mongodb.net/off-and-on-again-server?retryWrites=true&w=majority",
+    process.env.MONGO_ATLAS_URL_2ND_HALF,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
