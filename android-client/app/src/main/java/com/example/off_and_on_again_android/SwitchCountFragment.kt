@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.off_and_on_again_android.databinding.FragmentSwitchCountBinding
@@ -58,6 +59,18 @@ class SwitchCountFragment : Fragment() {
 
         viewModel.flipCount.observe(viewLifecycleOwner) {
             binding.flipCountValue.text = viewModel.flipCount.value.toString()
+        }
+        viewModel.isOn.observe(viewLifecycleOwner) { isOn ->
+            when (isOn) {
+                true -> {
+                    binding.offIndicator.isVisible = false
+                    binding.onIndicator.isVisible = true
+                }
+                false -> {
+                    binding.onIndicator.isVisible = false
+                    binding.offIndicator.isVisible = true
+                }
+            }
         }
 
 //        binding.buttonFirst.setOnClickListener {

@@ -1,15 +1,10 @@
 package com.example.off_and_on_again_android
 
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.emitter.Emitter
-import kotlinx.coroutines.launch
-import org.json.JSONException
 import org.json.JSONObject
 import java.net.URISyntaxException
 
@@ -21,9 +16,9 @@ class SwitchCountViewModel : ViewModel() {
     val flipCount: LiveData<Int>
         get() = _flipCount
 
-    private val _switchResponse = MutableLiveData<SwitchResponse>()
-    val switchResponse: LiveData<SwitchResponse>
-        get() = _switchResponse
+    private var _isOn = MutableLiveData<Boolean>()
+    val isOn: LiveData<Boolean>
+        get() = _isOn
 
     fun setupSocketConnection(): Socket? {
         return try {
@@ -34,13 +29,14 @@ class SwitchCountViewModel : ViewModel() {
     }
 
     fun updateFlipCount(data: JSONObject) {
-        _flipCount.value = data.getJSONObject("switch").getInt("countFlips")
+        _flipCount.value = data.getInt("countFlips")
+        _isOn.value = data.getBoolean("isOn")
     }
-
-    fun getSwitchCount(switchId: String = SWITCH_ID) {
-        viewModelScope.launch {
-            _switchResponse.value = RaspberryPiApi.retrofitService.getSwitch(switchId)
-            _flipCount.value = switchResponse.value?.switch?.countFlips
-        }
-    }
+//    //Need to add back HTTP request functionality, need it for initial setup
+//    fun getSwitchCount(switchId: String = SWITCH_ID) {
+//        viewModelScope.launch {
+//            _switchResponse.value = RaspberryPiApi.retrofitService.getSwitch(switchId)
+//            _flipCount.value = switchResponse.value?.switch?.countFlips
+//        }
+//    }
 }

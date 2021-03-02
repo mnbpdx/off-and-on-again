@@ -10,4 +10,6 @@
     <string name="flip_count_title">Flip Count:</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="flip_count_value_placeholder">3</string>
+    <string name="off_text">OFF</string>
+    <string name="on_text">ON</string>
 </resources>
