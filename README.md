@@ -23,15 +23,16 @@ Flip a physical switch and see a number increment on your smartphone!
 This codebase contains everything to make this work, other than wiring the switch and
 configuring the script. <br />
 **Important note: I haven't actually used this with a physical switch yet, as we're waiting
-on parts. There's a test program in switch-client that I've used to test the system. You'll
-need to fiddle with my script implementation till it works for you. Shouldnt be too tough.**
+on parts. There's a test script (Flipper.py) in switch-client that I've used to test the 
+system. You'll need to fiddle with my script implementation till it works for you. Shouldn't 
+be too tough.**
 
 ## Understanding the Directory:
-**switch-client:** Python script/client to monitor sensor/hardware running on a Raspberry Pi
+**switch-client:** Python script/client to monitor sensor/hardware (just a switch rn) running on a Raspberry Pi
 
 **server:** RESTful API on a Node.js server, data hosted via MongoDB
 
-**android-client:** Android client to display sensor data.
+**android-client:** Android client to display sensor (switch) data.
 
 ## How to Use
 
