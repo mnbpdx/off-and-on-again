@@ -2,7 +2,7 @@
 
 
 Hey there, thanks for checking out my little project. For context, this is my first
-foray into Raspberry Pi tinkering, my second or third Android app, and my second or
+foray into Raspberry Pi tinkering, my third or fourth Android app, and my second or
 third Node.js server. I also spun this all up in roughly a day.
 
 Given those constraints, things are a bit of a mess. I plan to use this code
