@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.off_and_on_again_android.databinding.FragmentSwitchCountBinding
+import io.socket.client.Socket
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -17,8 +18,8 @@ class SwitchCountFragment : Fragment() {
 
     private var _binding: FragmentSwitchCountBinding? = null
 
-    // This property is only valid between onCreateView and
-// onDestroyView.
+    private lateinit var socket: Socket
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,6 +29,8 @@ class SwitchCountFragment : Fragment() {
     ): View? {
         _binding = FragmentSwitchCountBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(SwitchCountViewModel::class.java)
+        viewModel.setupSocketConnection()?.let { socket = it }
+        socket.connect()
         activity?.let { viewModel.getSwitchCountRealTime(it) }
         return binding.root
     }

@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
+import java.net.URISyntaxException
 
 const val SWITCH_ID = "603c51e024be826bad81e9f2"
 
@@ -23,7 +25,11 @@ class SwitchCountViewModel : ViewModel() {
     val switchResponse: LiveData<SwitchResponse>
         get() = _switchResponse
 
-    private lateinit var socket: Socket
+    fun setupSocketConnection(): Socket? {
+        return try {
+            IO.socket("http://192.168.1.23:5000")
+        } catch (e: URISyntaxException) { null }
+    }
 
     fun getSwitchCountRealTime(activity: FragmentActivity) {
         val listener = Emitter.Listener { args ->

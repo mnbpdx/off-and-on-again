@@ -41,6 +41,10 @@ app.use((req, res, next) => {
 // // Routes to handle requests
 app.use("/switches", switchRoutes);
 
+// app.get("/", (req, res) => {
+//   console.log("Get Reqest called");
+// });
+
 // Handles requests that don't correspond to routes
 app.use((req, res, next) => {
   const error = new Error("Route Not found");
