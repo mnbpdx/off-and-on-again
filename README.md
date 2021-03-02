@@ -32,8 +32,8 @@ This codebase contains everything to make this work, other than wiring the switc
 configuring the script. <br />
 **Important note: I haven't actually used this with a physical switch yet, as we're waiting
 on parts. There's a test script (Flipper.py) in switch-client that I've used to test the 
-system. You'll need to fiddle with my script implementation till it works for you. Shouldn't 
-be too tough.**
+system. You'll need to fiddle with my script implementation till your button/switch works 
+for you. Shouldn't be too tough.**
 
 ## Understanding the Directory
 **switch-client:** Python script/client to monitor sensor/hardware (just a switch rn) running on a Raspberry Pi
