@@ -43,7 +43,9 @@ Basic steps:
 1. Clone project onto your Pi
 2. Configure switch-client to talk to your button/switch
 3. Configure switch-client, server and android-client to use **your** local IP addresses
-4. Build the app from Android Studio onto your phone
-5. Spin up the server and clients on the Pi
-6. Start the app
+4. Spin up a MongoDB custer
+5. Configure server to speak with your MongoDB cluser.
+6. Build the app from Android Studio onto your phone
+7. Spin up the server and clients on the Pi
+8. Start the app
 
