@@ -48,18 +48,27 @@ class SwitchCountFragment : Fragment() {
     ): View? {
         _binding = FragmentSwitchCountBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(SwitchCountViewModel::class.java)
+        setUpSocket()
+        return binding.root
+    }
+
+    private fun setUpSocket() {
         viewModel.setupSocketConnection()?.let { socket = it }
         socket.on("switch-response", onSwitchResponse)
         socket.connect()
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeFlipCount()
+        observeIsOn()
 
-        viewModel.flipCount.observe(viewLifecycleOwner) {
-            binding.flipCountValue.text = viewModel.flipCount.value.toString()
-        }
+//        binding.buttonFirst.setOnClickListener {
+//            viewModel.getSwitchCount()
+//        }
+    }
+
+    private fun observeIsOn() {
         viewModel.isOn.observe(viewLifecycleOwner) { isOn ->
             when (isOn) {
                 true -> {
@@ -72,17 +81,22 @@ class SwitchCountFragment : Fragment() {
                 }
             }
         }
+    }
 
-//        binding.buttonFirst.setOnClickListener {
-//            viewModel.getSwitchCount()
-//        }
+    private fun observeFlipCount() {
+        viewModel.flipCount.observe(viewLifecycleOwner) {
+            binding.flipCountValue.text = viewModel.flipCount.value.toString()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        disconnectSocket()
+        _binding = null
+    }
 
+    private fun disconnectSocket() {
         socket.disconnect()
         socket.off("switch-response", onSwitchResponse)
-        _binding = null
     }
 }
