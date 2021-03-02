@@ -1,5 +1,6 @@
 import Switch from "../models/Switch.js";
 import mongoose from "mongoose";
+import { io } from "../../server.js";
 
 export function switches_get_switch(req, res, next) {
   Switch.findById(req.params.switchId)
@@ -87,6 +88,7 @@ export function switches_update_switch(req, res, next) {
           message: "Switch Updated!!",
           updatedSwitch: { aSwitch },
         });
+        io.emit("switch-response", aSwitch);
       } else {
         res.status(404).json({ message: "Switch not found" });
       }

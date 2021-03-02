@@ -7,10 +7,14 @@ import { Server } from "socket.io";
 const port = process.env.port || 5000;
 
 const server = createServer(app);
-const io = new Server(server);
+export const io = new Server(server);
 
 io.on("connection", (socket) => {
   console.log("We have a new connection!!!");
+
+  socket.on("switch-response", (response) => {
+    io.emit("switch-response", response);
+  });
 
   socket.on("disconnect", () => {
     console.log("User has left!!!");
