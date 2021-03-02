@@ -12,13 +12,21 @@ and learn more about proper architecture.
 This README is mostly for my own learning, its probably missing important information
 for actually implementing this yourself. Please contact me if you've got any questions!
 
-## What it does
+## What it Does
 
 Flip a physical switch and see a number increment on your smartphone!
 
 <img src="Screenshot_20210302-102515.png" alt="Screenshot of off-and-on-again App" width="300"/>
 (disregard the non-fucntioning FAB that I forgot to remove) <br />
 <br />
+
+## How it Works
+
+A Python script on the Pi monitors the switch state and sends a signal to update
+(via HTTP) to the Node.js server, running on the same Pi. The Node.js server stores
+updates a Switch document in MongoDB and sends a JSON object via Socket.io to any
+Android clients that are listening on the socket. The Android client then updates
+its LiveData and populates its fragment with the new data.
 
 This codebase contains everything to make this work, other than wiring the switch and
 configuring the script. <br />
@@ -27,7 +35,7 @@ on parts. There's a test script (Flipper.py) in switch-client that I've used to 
 system. You'll need to fiddle with my script implementation till it works for you. Shouldn't 
 be too tough.**
 
-## Understanding the Directory:
+## Understanding the Directory
 **switch-client:** Python script/client to monitor sensor/hardware (just a switch rn) running on a Raspberry Pi
 
 **server:** RESTful API on a Node.js server, data hosted via MongoDB
