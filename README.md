@@ -22,8 +22,8 @@ Flip a physical switch and see a number increment on your smartphone!
 
 ## How it Works
 
-A Python script on the Pi monitors the switch state and sends a signal to update
-(via HTTP) to the Node.js server, running on the same Pi. The Node.js server stores
+A Python script on the Pi monitors the switch state and sends a signal (via HTTP)
+to update a Node.js server, running on the same Pi. The Node.js server
 updates a Switch document in MongoDB and sends a JSON object via Socket.io to any
 Android clients that are listening on the socket. The Android client then updates
 its LiveData and populates its fragment with the new data.
