@@ -28,22 +28,13 @@ class SwitchCountViewModel : ViewModel() {
     fun setupSocketConnection(): Socket? {
         return try {
             IO.socket("http://192.168.1.23:5000")
-        } catch (e: URISyntaxException) { null }
+        } catch (e: URISyntaxException) {
+            null
+        }
     }
 
-    fun getSwitchCountRealTime(activity: FragmentActivity) {
-        val listener = Emitter.Listener { args ->
-            activity.runOnUiThread(
-                Runnable {
-                    val data = args[0] as JSONObject
-                    try {
-                        _flipCount.value = data.getJSONObject("switch").getInt("countFlips")
-                    } catch (e: JSONException) {
-                        return@Runnable
-                    }
-                }
-            )
-        }
+    fun updateFlipCount(data: JSONObject) {
+        _flipCount.value = data.getJSONObject("switch").getInt("countFlips")
     }
 
     fun getSwitchCount(switchId: String = SWITCH_ID) {
