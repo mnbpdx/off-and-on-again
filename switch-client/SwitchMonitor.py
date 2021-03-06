@@ -4,6 +4,7 @@ from os import system, name
 
 def main():
     url = 'http://localhost:5000/switches' 
+    beaverTailId = '603c51e024be826bad81e9f2'
 
     print("Monitoring Beaver Tail Switch...")
 
@@ -11,9 +12,9 @@ def main():
 
     while True:
         printValues(beaverTail)
-        waitForSwitchOn(beaverTail, url)
+        waitForSwitchOn(beaverTail, url, beaverTailId)
         printValues(beaverTail)
-        waitForSwitchOff(beaverTail, url)
+        waitForSwitchOff(beaverTail, url, beaverTailId)
 
 def printValues(switch):
     print("Current Values of beaverTail object:")
@@ -27,14 +28,14 @@ def printValues(switch):
     print("pull_up: " + str(switch.pull_up))
     print("value: " + str(switch.value))
 
-def waitForSwitchOn(switch, url):
+def waitForSwitchOn(switch, url, switchId):
     switch.wait_for_press()
-    r = requests.patch(url, json=payload)
+    r = requests.patch(url + '/' + switchId)
     print("Beaver Tail switched on!")
     
-def waitForSwitchOff(switch, url):
+def waitForSwitchOff(switch, url, switchId):
     switch.wait_for_release()
-    r = requests.patch(url, json=payload)
+    r = requests.patch(url + '/' + switchId)
     print("Beaver Tail switched off!")
 
 def objectTest():
